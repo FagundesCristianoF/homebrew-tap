@@ -17,14 +17,15 @@ cask "devkeys" do
   depends_on macos: :sonoma
 
   # No prebuilt artifact to stage — build it from the tagged source SwiftPM
-  # just checked out into the staging directory, the same way
-  # scripts/build-app.sh does for local dev installs.
+  # just checked out into the staging directory. build-app.sh itself runs
+  # `swift build -c release` and assembles .build/app/Devkeys.app, same as
+  # for local dev installs. `writable_paths: ["."]` grants the sandboxed
+  # step write access to the whole checkout (needed for `.build/`); `base:
+  # :staged_path` on the command itself is required separately — `run`
+  # only defaults `chdir`/`writable_paths` to staged_path, not the command
+  # path.
   preflight_steps do
-    system_command "/usr/bin/swift",
-                    args: ["build", "-c", "release"],
-                    chdir: staged_path
-    system_command "#{staged_path}/scripts/build-app.sh",
-                    chdir: staged_path
+    run "scripts/build-app.sh", base: :staged_path, chdir: ".", writable_paths: ["."]
   end
 
   app ".build/app/Devkeys.app"
@@ -32,10 +33,10 @@ cask "devkeys" do
   # The build is only ad-hoc signed (no Apple Developer ID / notarization),
   # so Gatekeeper would otherwise refuse to launch it. Homebrew Cask
   # quarantines every installed app regardless of source; strip that here
-  # since we just built it ourselves from source we control.
+  # since we just built it ourselves from source we control. {{appdir}}
+  # expands to the cask's target Applications directory.
   postflight_steps do
-    system_command "/usr/bin/xattr",
-                    args: ["-dr", "com.apple.quarantine", "#{appdir}/Devkeys.app"]
+    run "/usr/bin/xattr", args: ["-dr", "com.apple.quarantine", "{{appdir}}/Devkeys.app"]
   end
 
   zap trash: [
