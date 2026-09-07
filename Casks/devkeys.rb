@@ -9,21 +9,23 @@ cask "devkeys" do
       using:    :git,
       tag:      "v#{version}",
       revision: "33f0548f2f8d4ff527e7d599ad646f612a3a7ef2"
-
   name "Devkeys"
-  desc "Personal credential/password vault for macOS"
+  desc "Personal credential/password vault"
   homepage "https://github.com/FagundesCristianoF/devkeys"
 
   depends_on macos: :sonoma
 
-  # No prebuilt artifact to stage — build it from the tagged source SwiftPM
-  # just checked out into the staging directory. build-app.sh itself runs
-  # `swift build -c release` and assembles .build/app/Devkeys.app, same as
-  # for local dev installs. `writable_paths: ["."]` grants the sandboxed
-  # step write access to the whole checkout (needed for `.build/`); `base:
-  # :staged_path` on the command itself is required separately — `run`
-  # only defaults `chdir`/`writable_paths` to staged_path, not the command
-  # path.
+  # Deliberately BEFORE `app` below, against brew style's usual canonical
+  # order (style wants preflight_steps after the artifact stanzas) —
+  # artifacts install in file declaration order (Cask::Installer#
+  # install_artifacts just iterates them in order added), and unlike a
+  # normal cask, this preflight step is what PRODUCES the .app that `app`
+  # then symlinks in. Reordering to match style would try to symlink an
+  # app that doesn't exist yet. `writable_paths: ["."]` grants the
+  # sandboxed step write access to the whole checkout (needed for
+  # `.build/`); `base: :staged_path` on the command itself is required
+  # separately — `run` only defaults `chdir`/`writable_paths` to
+  # staged_path, not the command path.
   preflight_steps do
     run "scripts/build-app.sh", base: :staged_path, chdir: ".", writable_paths: ["."]
   end
