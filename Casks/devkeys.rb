@@ -14,12 +14,12 @@ cask "devkeys" do
   desc "Personal credential/password vault for macOS"
   homepage "https://github.com/FagundesCristianoF/devkeys"
 
-  depends_on macos: ">= :sonoma"
+  depends_on macos: :sonoma
 
   # No prebuilt artifact to stage — build it from the tagged source SwiftPM
   # just checked out into the staging directory, the same way
   # scripts/build-app.sh does for local dev installs.
-  preflight do
+  preflight_steps do
     system_command "/usr/bin/swift",
                     args: ["build", "-c", "release"],
                     chdir: staged_path
@@ -33,7 +33,7 @@ cask "devkeys" do
   # so Gatekeeper would otherwise refuse to launch it. Homebrew Cask
   # quarantines every installed app regardless of source; strip that here
   # since we just built it ourselves from source we control.
-  postflight do
+  postflight_steps do
     system_command "/usr/bin/xattr",
                     args: ["-dr", "com.apple.quarantine", "#{appdir}/Devkeys.app"]
   end
