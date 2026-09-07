@@ -5,7 +5,7 @@ cask "devkeys" do
   # Devkeys is closed-source (private repo) and distributed as source, not a
   # prebuilt binary — pin an exact commit so `brew install` always builds
   # the same code, same as a checksum would for a downloaded artifact.
-  url "git@github.com:FagundesCristianoF/devkeys.git",
+  url "ssh://git@github.com/FagundesCristianoF/devkeys.git",
       using:    :git,
       tag:      "v#{version}",
       revision: "33f0548f2f8d4ff527e7d599ad646f612a3a7ef2"
