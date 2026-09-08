@@ -25,9 +25,16 @@ cask "devkeys" do
   # sandboxed step write access to the whole checkout (needed for
   # `.build/`); `base: :staged_path` on the command itself is required
   # separately — `run` only defaults `chdir`/`writable_paths` to
-  # staged_path, not the command path.
+  # staged_path, not the command path. The two `~/Library/...` entries
+  # are SwiftPM's own manifest/config caches — without them the sandbox
+  # denies those writes too (harmless warnings, just no cache reuse
+  # across installs) since they fall outside staged_path.
   preflight_steps do
-    run "scripts/build-app.sh", base: :staged_path, chdir: ".", writable_paths: ["."]
+    run "scripts/build-app.sh", base: :staged_path, chdir: ".", writable_paths: [
+      ".",
+      "~/Library/Caches/org.swift.swiftpm",
+      "~/Library/org.swift.swiftpm",
+    ]
   end
 
   app ".build/app/Devkeys.app"
