@@ -29,12 +29,18 @@ cask "devkeys" do
   # are SwiftPM's own manifest/config caches — without them the sandbox
   # denies those writes too (harmless warnings, just no cache reuse
   # across installs) since they fall outside staged_path.
+  # `network_access: true` is required too — the cask sandbox denies all
+  # network by default, and `swift build` needs to clone the sentry-cocoa
+  # dependency from GitHub. Without it the build fails with a DNS-looking
+  # error ("Could not resolve host: github.com") even on a machine with
+  # working internet, because it's the sandbox denying the socket, not an
+  # actual DNS problem.
   preflight_steps do
     run "scripts/build-app.sh", base: :staged_path, chdir: ".", writable_paths: [
       ".",
       "~/Library/Caches/org.swift.swiftpm",
       "~/Library/org.swift.swiftpm",
-    ]
+    ], network_access: true
   end
 
   app ".build/app/Devkeys.app"
