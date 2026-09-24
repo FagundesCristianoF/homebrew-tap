@@ -4,29 +4,26 @@ Personal Homebrew tap.
 
 ```
 brew tap FagundesCristianoF/tap
+brew install --cask brace
+brew install --cask processmonitor
 brew install --cask devkeys
 ```
 
 ## Casks
 
-- **devkeys** — personal credential/password vault for macOS. Private
-  repo, builds from source (SwiftPM) on install — see `Casks/devkeys.rb`.
-  Needs Xcode Command Line Tools (`swift`) and SSH access to
-  `FagundesCristianoF/devkeys` (private) to build.
+- **brace** — native macOS JSON viewer, editor and HTTP scanner. Notarized DMG from [brace-brew](https://github.com/FagundesCristianoF/brace-brew/releases).
+- **processmonitor** — menu bar app that monitors memory usage for developer processes. Notarized zip from [process-monitor](https://github.com/FagundesCristianoF/process-monitor/releases).
+- **devkeys** — personal credential/password vault. Private repo, builds from source (SwiftPM) on install; needs Xcode Command Line Tools and SSH access to `FagundesCristianoF/devkeys`.
 
-## Releasing a new devkeys version
+## Releasing
 
-From the `devkeys` repo:
+Casks are updated automatically. Each app's `release.yml` pipeline runs when its `Info.plist` version changes on the default branch, and commits the new `version` / `sha256` (or `revision` for devkeys) here. Nothing to run by hand.
 
-```
-scripts/release.sh <new-version>   # e.g. 1.1.0
-```
+## Migrating from the old taps
 
-That tags and pushes `v<version>`. Then here:
+`FagundesCristianoF/brace` and `FagundesCristianoF/processmonitor` were merged into this tap. Homebrew redirects installs automatically; to clean up:
 
 ```
-scripts/bump-devkeys.sh <new-version>
-git add -A && git commit -m "devkeys <new-version>" && git push
+brew untap FagundesCristianoF/brace FagundesCristianoF/processmonitor
+brew tap FagundesCristianoF/tap
 ```
-
-`brew upgrade --cask devkeys` (after `brew update`) then rebuilds it.
