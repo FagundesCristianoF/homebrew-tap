@@ -1,4 +1,4 @@
-cask "processmonitor" do
+cask "devprocessmonitor" do
   version "1.14.4"
   sha256 "96e6440477aa2ee6aac23c72d09bbec7ca609b7149145100adc2aec03402d819"
 

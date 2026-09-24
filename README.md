@@ -5,14 +5,14 @@ Personal Homebrew tap.
 ```
 brew tap FagundesCristianoF/tap
 brew install --cask brace
-brew install --cask processmonitor
+brew install --cask devprocessmonitor
 brew install --cask devkeys
 ```
 
 ## Casks
 
 - **brace** — native macOS JSON viewer, editor and HTTP scanner. Notarized DMG from [brace-brew](https://github.com/FagundesCristianoF/brace-brew/releases).
-- **processmonitor** — menu bar app that monitors memory usage for developer processes. Notarized zip from [process-monitor](https://github.com/FagundesCristianoF/process-monitor/releases).
+- **devprocessmonitor** — menu bar app that monitors memory usage for developer processes. Notarized zip from [process-monitor](https://github.com/FagundesCristianoF/process-monitor/releases).
 - **devkeys** — personal credential/password vault. Private repo, builds from source (SwiftPM) on install; needs Xcode Command Line Tools and SSH access to `FagundesCristianoF/devkeys`.
 
 ## Releasing
