@@ -21,9 +21,11 @@ Casks are updated automatically. Each app's `release.yml` pipeline runs when its
 
 ## Migrating from the old taps
 
-`FagundesCristianoF/brace` and `FagundesCristianoF/processmonitor` were merged into this tap. Homebrew redirects installs automatically; to clean up:
+`FagundesCristianoF/brace` and `FagundesCristianoF/processmonitor` were merged into this tap.
 
 ```
 brew untap FagundesCristianoF/brace FagundesCristianoF/processmonitor
 brew tap FagundesCristianoF/tap
 ```
+
+The Process Monitor cask is now `devprocessmonitor`. The old token `processmonitor` collides with Objective-See's ProcessMonitor in homebrew/cask, so always install ours by the new name.
