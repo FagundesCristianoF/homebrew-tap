@@ -1,5 +1,5 @@
 cask "devkeys" do
-  version "1.8.3"
+  version "1.8.4"
   sha256 :no_check
 
   # Devkeys is closed-source (private repo) and distributed as source, not a
@@ -8,7 +8,7 @@ cask "devkeys" do
   url "ssh://git@github.com/FagundesCristianoF/devkeys.git",
       using:    :git,
       tag:      "v#{version}",
-      revision: "51de84c582f91be3924da046f98129eb41ebb12e"
+      revision: "fdb256000328c70cc16cd90edf6543ed55f7f9ad"
   name "Devkeys"
   desc "Personal credential/password vault"
   homepage "https://github.com/FagundesCristianoF/devkeys"
