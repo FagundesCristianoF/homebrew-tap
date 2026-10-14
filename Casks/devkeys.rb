@@ -1,58 +1,18 @@
 cask "devkeys" do
-  version "1.8.6"
-  sha256 :no_check
+  version "1.8.7"
+  sha256 "3c4c0d44a759561de3df585514cc75cce9c82a54fb13fba24888eeca4e9340c0"
 
-  # Devkeys is closed-source (private repo) and distributed as source, not a
-  # prebuilt binary — pin an exact commit so `brew install` always builds
-  # the same code, same as a checksum would for a downloaded artifact.
-  url "ssh://git@github.com/FagundesCristianoF/devkeys.git",
-      using:    :git,
-      tag:      "v#{version}",
-      revision: "99d86b1a3e205312aac17aec378c35cb91f1c324"
+  # Prebuilt, Developer ID-signed and notarized app, published by CI as a
+  # release asset on this (public) tap repo, because the source repo is private.
+  url "https://github.com/FagundesCristianoF/homebrew-tap/releases/download/devkeys-v#{version}/Devkeys-#{version}.zip"
   name "Devkeys"
   desc "Personal credential/password vault"
-  homepage "https://github.com/FagundesCristianoF/devkeys"
+  homepage "https://github.com/FagundesCristianoF/homebrew-tap"
 
   depends_on macos: :sonoma
+  depends_on arch: :arm64
 
-  # Deliberately BEFORE `app` below, against brew style's usual canonical
-  # order (style wants preflight_steps after the artifact stanzas) —
-  # artifacts install in file declaration order (Cask::Installer#
-  # install_artifacts just iterates them in order added), and unlike a
-  # normal cask, this preflight step is what PRODUCES the .app that `app`
-  # then symlinks in. Reordering to match style would try to symlink an
-  # app that doesn't exist yet. `writable_paths: ["."]` grants the
-  # sandboxed step write access to the whole checkout (needed for
-  # `.build/`); `base: :staged_path` on the command itself is required
-  # separately — `run` only defaults `chdir`/`writable_paths` to
-  # staged_path, not the command path. The two `~/Library/...` entries
-  # are SwiftPM's own manifest/config caches — without them the sandbox
-  # denies those writes too (harmless warnings, just no cache reuse
-  # across installs) since they fall outside staged_path.
-  # `network_access: true` is required too — the cask sandbox denies all
-  # network by default, and `swift build` needs to clone the sentry-cocoa
-  # dependency from GitHub. Without it the build fails with a DNS-looking
-  # error ("Could not resolve host: github.com") even on a machine with
-  # working internet, because it's the sandbox denying the socket, not an
-  # actual DNS problem.
-  preflight_steps do
-    run "scripts/build-app.sh", base: :staged_path, chdir: ".", writable_paths: [
-      ".",
-      "~/Library/Caches/org.swift.swiftpm",
-      "~/Library/org.swift.swiftpm",
-    ], network_access: true
-  end
-
-  app ".build/app/Devkeys.app"
-
-  # The build is only ad-hoc signed (no Apple Developer ID / notarization),
-  # so Gatekeeper would otherwise refuse to launch it. Homebrew Cask
-  # quarantines every installed app regardless of source; strip that here
-  # since we just built it ourselves from source we control. {{appdir}}
-  # expands to the cask's target Applications directory.
-  postflight_steps do
-    run "/usr/bin/xattr", args: ["-dr", "com.apple.quarantine", "{{appdir}}/Devkeys.app"]
-  end
+  app "Devkeys.app"
 
   zap trash: [
     "~/Library/Preferences/dev.cristianofagundes.devkeys.plist",
