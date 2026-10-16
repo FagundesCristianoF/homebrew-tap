@@ -1,6 +1,6 @@
 cask "devkeys" do
-  version "1.8.7"
-  sha256 "3c4c0d44a759561de3df585514cc75cce9c82a54fb13fba24888eeca4e9340c0"
+  version "1.8.8"
+  sha256 "9469b083d91c8504401c2d5ac4c0db2fdfa0d6eb6dc6d00f72ceb9effc1ae004"
 
   # Prebuilt, Developer ID-signed and notarized app, published by CI as a
   # release asset on this (public) tap repo, because the source repo is private.
