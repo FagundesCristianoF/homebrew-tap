@@ -1,0 +1,15 @@
+<?xml version="1.0" standalone="yes"?>
+<rss xmlns:sparkle="http://www.andymatuschak.org/xml-namespaces/sparkle" version="2.0">
+    <channel>
+        <title>Devkeys</title>
+        <item>
+            <title>1.10.0</title>
+            <pubDate>Sat, 14 Nov 2026 04:04:36 -0300</pubDate>
+            <sparkle:version>1.10.0</sparkle:version>
+            <sparkle:shortVersionString>1.10.0</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>14.0</sparkle:minimumSystemVersion>
+            <sparkle:hardwareRequirements>arm64</sparkle:hardwareRequirements>
+            <enclosure url="https://github.com/FagundesCristianoF/homebrew-tap/releases/download/devkeys-v1.10.0/Devkeys-1.10.0.zip" length="4023486" type="application/octet-stream" sparkle:edSignature="mGeiGf5D2nj+Eq/att+aG2i7QJT6DHx5svHp4ad4g7Srdg+XUTQgbeRxZ21mTH5f62VCp/5g0kOAKjE8WGKdAw=="/>
+        </item>
+    </channel>
+</rss>

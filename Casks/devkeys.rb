@@ -1,6 +1,6 @@
 cask "devkeys" do
-  version "1.9.0"
-  sha256 "1fbc9df52ddf864b34d2a0a6209e41403bd39b68581c3c40dbc95de24389de66"
+  version "1.10.0"
+  sha256 "a0de9d6dd824915ecf3957c91f075cfa90b3b9d7195c41966bb3c0acd76e90ee"
 
   # Prebuilt, Developer ID-signed and notarized app, published by CI as a
   # release asset on this (public) tap repo, because the source repo is private.
@@ -8,6 +8,9 @@ cask "devkeys" do
   name "Devkeys"
   desc "Personal credential/password vault"
   homepage "https://github.com/FagundesCristianoF/homebrew-tap"
+
+  # The app updates itself through Sparkle (suggested / forced updates).
+  auto_updates true
 
   depends_on macos: :sonoma
   depends_on arch: :arm64
