@@ -3,13 +3,13 @@
     <channel>
         <title>Devkeys</title>
         <item>
-            <title>1.10.1</title>
-            <pubDate>Sat, 21 Nov 2026 23:28:33 +0000</pubDate>
-            <sparkle:version>1.10.1</sparkle:version>
-            <sparkle:shortVersionString>1.10.1</sparkle:shortVersionString>
+            <title>1.10.2</title>
+            <pubDate>Sun, 22 Nov 2026 02:23:06 +0000</pubDate>
+            <sparkle:version>1.10.2</sparkle:version>
+            <sparkle:shortVersionString>1.10.2</sparkle:shortVersionString>
             <sparkle:minimumSystemVersion>14.0</sparkle:minimumSystemVersion>
             <sparkle:hardwareRequirements>arm64</sparkle:hardwareRequirements>
-            <enclosure url="https://github.com/FagundesCristianoF/homebrew-tap/releases/download/devkeys-v1.10.1/Devkeys-1.10.1.zip" length="4041200" type="application/octet-stream" sparkle:edSignature="cCGVVyxzaVuDd8Tk7xwYnqVLhKzIFQ2Wo8cRf5s3s84Hp8rx1TVf9uH3v8zPc75XkEdRsT0ca57H6CNdYF4vBw=="/>
+            <enclosure url="https://github.com/FagundesCristianoF/homebrew-tap/releases/download/devkeys-v1.10.2/Devkeys-1.10.2.zip" length="4046665" type="application/octet-stream" sparkle:edSignature="lnJuD/tKCen0mh95hnUPX4qgp4mndh/MTo4RuYAGGEcoOSOotC3tWhhiJjtt/A80Y5GLo6i4mDhNWFV4P+5yBQ=="/>
         </item>
     </channel>
 </rss>
